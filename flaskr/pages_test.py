@@ -27,7 +27,7 @@ def test_home_page(client):
 def test_about_page(client):
     resp = client.get("/about")
     assert resp.status_code == 200
-    assert b"About This Wiki\n" in resp.data
+    assert b"About This Wiki" in resp.data
 
 
 def test_all_pages(client):

@@ -1,21 +1,337 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-
-html {
-    margin: 25px;
-    background-color: lightblue;
-    font-family: verdana;
-    font-size: 20px;
+/* Cats on Skis — playful winter palette */
+:root {
+    --color-snow: #f8fafc;
+    --color-ice: #e0f7fa;
+    --color-sky: #7dd3fc;
+    --color-aurora: #a78bfa;
+    --color-sunset: #fb7185;
+    --color-mountain: #1e3a5f;
+    --color-ink: #0f172a;
+    --color-muted: #64748b;
+    --font-display: "Fredoka", system-ui, sans-serif;
+    --font-body: "Nunito", system-ui, sans-serif;
+    --radius-lg: 1.25rem;
+    --radius-md: 0.75rem;
+    --shadow-soft: 0 4px 24px rgba(30, 58, 95, 0.12);
+    --shadow-card: 0 8px 32px rgba(15, 23, 42, 0.08);
+    --transition: 0.2s ease;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+    background: var(--color-snow);
+    position: relative;
+}
+
+.site-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse 120% 80% at 100% -20%, rgba(251, 113, 133, 0.18), transparent 50%),
+        radial-gradient(ellipse 100% 60% at -10% 50%, rgba(167, 139, 250, 0.15), transparent 45%),
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(125, 211, 252, 0.25), transparent 55%),
+        linear-gradient(180deg, var(--color-snow) 0%, var(--color-ice) 100%);
+    pointer-events: none;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-mountain);
+    color: white;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    z-index: 100;
+    transition: top var(--transition);
+}
+
+.skip-link:focus {
+    top: 1rem;
+    outline: 3px solid var(--color-sky);
+    outline-offset: 2px;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(248, 250, 252, 0.85);
+    border-bottom: 1px solid rgba(125, 211, 252, 0.35);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+.site-header__inner {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition);
+}
+
+.brand:hover {
+    transform: scale(1.02);
+}
+
+.brand__emoji {
+    font-size: 2.25rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(30, 58, 95, 0.15));
+}
+
+.brand__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.brand__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    background: linear-gradient(120deg, var(--color-mountain), var(--color-aurora));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.brand__tagline {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.nav__link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--color-mountain);
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid transparent;
+    transition: background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.nav__link:hover {
+    background: white;
+    border-color: var(--color-sky);
+    box-shadow: var(--shadow-soft);
+}
+
+.nav__link--active {
+    background: linear-gradient(135deg, rgba(125, 211, 252, 0.45), rgba(167, 139, 250, 0.35));
+    border-color: rgba(167, 139, 250, 0.5);
+    color: var(--color-mountain);
+}
+
+.main {
+    padding: 2rem 1.25rem 3rem;
+}
+
+.main__inner {
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(125, 211, 252, 0.25);
+}
+
+.card--article {
+    animation: fade-up 0.5s ease backwards;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 700;
+    color: var(--color-mountain);
+    margin: 0 0 1.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.wiki-body {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--color-ink);
+}
+
+/* Legacy heading styles for child templates */
 h3 {
-    margin-top: 20px;
-    background-color: lightblue;
-    font-size: 30px;
-    font-weight: bolder;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-mountain);
+    margin: 1.75rem 0 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--color-sunset), var(--color-sky), var(--color-aurora)) 1;
+}
+
+h3:first-child {
+    margin-top: 0;
 }
 
 p {
-    margin-top: 10px;
-    margin-left: 15px;
-    background-color: lightblue;
+    margin: 0.75rem 0;
+    color: var(--color-ink);
+    max-width: 65ch;
+}
+
+.page-intro {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    margin-bottom: 1.5rem;
+    max-width: 50ch;
+}
+
+.page-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.page-list li {
+    margin: 0;
+}
+
+.page-list a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.1rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-mountain);
+    background: linear-gradient(135deg, rgba(224, 247, 250, 0.6), rgba(255, 255, 255, 0.9));
+    border-radius: var(--radius-md);
+    border: 2px solid rgba(125, 211, 252, 0.35);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.page-list a::before {
+    content: "⛷️";
+    font-size: 1.1rem;
+}
+
+.page-list a:hover {
+    transform: translateX(4px);
+    border-color: var(--color-aurora);
+    box-shadow: var(--shadow-soft);
+}
+
+.author-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    padding: 1.25rem;
+    background: linear-gradient(145deg, rgba(167, 139, 250, 0.12), rgba(125, 211, 252, 0.15));
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(167, 139, 250, 0.25);
+}
+
+.author-card img {
+    max-width: min(100%, 220px);
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    border: 3px solid white;
+}
+
+.author-card p {
+    margin: 0;
+    flex: 1;
+    min-width: 12rem;
+    font-weight: 600;
+    color: var(--color-mountain);
+}
+
+.site-footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    font-weight: 600;
+}
+
+.site-footer p {
+    margin: 0 auto;
+    max-width: none;
+}
+
+@media (max-width: 520px) {
+    .site-header__inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav {
+        justify-content: center;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
 }

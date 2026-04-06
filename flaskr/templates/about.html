@@ -5,18 +5,21 @@ About Cats on Skis
 {% endblock %}
 
 {% block content %}
-<h3>About Cats on Skis</h3>
+<article class="card card--article">
+    <h1 class="page-title">About This Wiki</h1>
+    <p class="page-intro">
+        Welcome to the coziest corner of the internet for alpine-inspired felines. We collect stories, facts, and pure joy about cats who live their best life on snow.
+    </p>
 
-<p>
-We love Cats on Skis! This is the absolute best place to find information about cats on skis.
-</p>
+    <h3>Our mission</h3>
+    <p>
+        We love Cats on Skis! This is the place to find information, tall tales, and true stories about cats on skis—whether they are pros or just along for the ride in a carrier.
+    </p>
 
-<h3>Your Authors</h3>
-
-<p>
-Slalom Sammy 
-<img src="{{ url_for('images', image='slalom-sammy') }}">
-</p>
-
+    <h3>Meet the author</h3>
+    <div class="author-card">
+        <p>Slalom Sammy — our fearless correspondent on the mountain.</p>
+        <img src="{{ url_for('images', image='slalom-sammy') }}" alt="Portrait of Slalom Sammy, the skiing cat author">
+    </div>
+</article>
 {% endblock %}
-

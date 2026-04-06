@@ -5,12 +5,16 @@ Wiki Pages
 {% endblock %}
 
 {% block content %}
-<h3>Pages contained in this Wiki</h3>
-<ul>
-    {% for page in all_pages %}
-    <li><a href="{{ url_for('pages', name=page) }}">{{page}}</a></li>
-    {% endfor %}
-</ul>
-
+<article class="card card--article">
+    <h1 class="page-title">Wiki pages</h1>
+    <p class="page-intro">
+        Pick a page below to read a story from our snowy archive. Each entry is stored right here in the wiki—click and enjoy the ride.
+    </p>
+    <h3>All entries</h3>
+    <ul class="page-list">
+        {% for page in all_pages %}
+        <li><a href="{{ url_for('pages', name=page) }}">{{ page }}</a></li>
+        {% endfor %}
+    </ul>
+</article>
 {% endblock %}
-

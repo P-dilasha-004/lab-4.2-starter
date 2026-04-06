@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <head>
-        <title>{% block page_name %}{{ page_name }}{% endblock %}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block page_name %}{{ page_name }}{% endblock %} · Cats on Skis Wiki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <!-- The below tag is using Bulma CSS. Try replacing line 14 with line 13. -->
-    <!-- <div class="has-text-success-dark is-size-4  has-text-weight-medium"> -->
-    <div>
-        <a href="{{ url_for('home') }}">
-            Home
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('all_pages') }}">
-            Pages
-        </a>
-        &nbsp;&nbsp;
-        <a href="{{ url_for('about') }}">
-            About
-        </a>
-    </div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- The below tag is using Bulma CSS. Try replacing line 30 with line 29. -->
-    <!-- <div class="content"> -->
-    <div>
-        {% block content %}{{ page_content }}{% endblock %}
-    </div>
+    <div class="site-bg" aria-hidden="true"></div>
 
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="{{ url_for('home') }}" class="brand">
+                <span class="brand__emoji" aria-hidden="true">🐱</span>
+                <span class="brand__text">
+                    <span class="brand__title">Cats on Skis</span>
+                    <span class="brand__tagline">The fluffiest wiki on the slopes</span>
+                </span>
+            </a>
+            <nav class="nav" aria-label="Main">
+                <a href="{{ url_for('home') }}" class="nav__link{% if request.endpoint == 'home' %} nav__link--active{% endif %}">Home</a>
+                <a href="{{ url_for('all_pages') }}" class="nav__link{% if request.endpoint in ['all_pages', 'pages'] %} nav__link--active{% endif %}">Pages</a>
+                <a href="{{ url_for('about') }}" class="nav__link{% if request.endpoint == 'about' %} nav__link--active{% endif %}">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="main">
+        <div class="main__inner">
+            {% block content %}
+            <article class="card card--article">
+                <h1 class="page-title">{{ page_name }}</h1>
+                <div class="wiki-body">{{ page_content }}</div>
+            </article>
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Paws on powder · Made with love for skiing cats everywhere</p>
+    </footer>
 </body>
 
 </html>
